@@ -1,5 +1,5 @@
 import torch
-from models.QVaLT import QVaLT
+# from models.QVaLT import QVaLT
 from torchvision import transforms
 from torchvision.datasets import ImageFolder
 from torch.utils.data import DataLoader, ConcatDataset, WeightedRandomSampler
