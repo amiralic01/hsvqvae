@@ -5,6 +5,7 @@ from PIL import Image, ImageOps
 from torchvision.datasets import ImageFolder
 from torch.utils.data import DataLoader, WeightedRandomSampler
 import torch.nn as nn
+from torch.nn import functional as F
 import os, shutil, datetime
 import logging
 from data.stats import data

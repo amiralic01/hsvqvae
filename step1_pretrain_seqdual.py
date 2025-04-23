@@ -1,4 +1,5 @@
 import torch
+from torch.nn import functional as F
 from torchvision import transforms
 from step1_analyze_data import PretrainingDataset
 from torch.utils.data import DataLoader, ConcatDataset, WeightedRandomSampler
