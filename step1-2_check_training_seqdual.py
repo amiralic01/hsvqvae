@@ -1,5 +1,6 @@
 import torch
 from models.seq_dual_svqvae import SequentialDualSVQVAE
+from torch.nn import functional as F
 from torchvision import transforms
 from step1_analyze_data import PretrainingDataset
 import torch
@@ -19,12 +20,15 @@ def denormalize_img(img, mean, std):
     return img.permute((1,2,0))
 
 if __name__ == '__main__':
+    os.makedirs("output", exist_ok=True)
+
     device = torch.device('mps') if torch.backends.mps.is_available() else 'cpu'  
     print('using device ', device)
     
     # !!!Change this to your checkpoint path!!!
     # ex. 'runs/pretrain-seqdual-recon_all-b24-e100-100-s10-0422_145623/checkpoints/model_final.pt'
-    model_checkpoint = 'runs/pretrain-seqdual-recon_all-b24-e100-100-s10-XXXXXX/checkpoints/model_final.pt'
+    model_checkpoint = 'runs/pretrain-seqdual-recon_all-b1-e1-1-s1-0423_001958/checkpoints/model_final.pt'
+    # model_checkpoint = 'runs/pretrain-seqdual-recon_all-b24-e100-100-s10-XXXXXX/checkpoints/model_final.pt'
     pretrain_dir = os.path.join(*model_checkpoint.split('/')[:-1])
     
     model_config = SimpleNamespace()

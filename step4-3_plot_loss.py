@@ -2,7 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import json
 
-checkpoint_file = 'checkpoints/losses.json'
+# update checkpoint path
+checkpoint_file = 'runs/train-seqdual-wbc_100-full-0423_012613/checkpoints/losses.json'
 with open(checkpoint_file,'r') as f:
     losses = json.load(f)
     

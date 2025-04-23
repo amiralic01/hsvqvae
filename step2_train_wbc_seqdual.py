@@ -121,6 +121,18 @@ if __name__ == '__main__':
         decays=decays,
         training_phase=training_phase  # Important: specify which parts to train
     )
+
+    with open(f'{checkpoints_directory}/model_config.py', 'w') as f:
+        f.write(f'img_size={img_size}\n')
+        f.write(f'in_channel={in_channel}\n')
+        f.write(f'num_classes={num_classes}\n')
+        f.write(f'num_vaes={num_vaes}\n')
+        f.write(f'vae_channels={vae_channels}\n')
+        f.write(f'res_blocks={res_blocks}\n')
+        f.write(f'res_channels={res_channels}\n')
+        f.write(f'embedding_dims={embedding_dims}\n')
+        f.write(f'codebook_size={codebook_size}\n')
+        f.write(f'decays={decays}\n')
     
     logging.info(f'checkpoint: {model_checkpoint}')
     logging.info(f'dataset: {dataset}')
@@ -235,11 +247,13 @@ if __name__ == '__main__':
                     )
                     svqvae2_input = torch.cat([level3_upsampled, level1_encoding], dim=1)
                     
-                    # Encode through SVQVAE2
+                    # Get SVQVAE2 encodings and reconstructions
                     qt3, qb3, qj3, diff3, _, _ = model.svqvae2[0].encode(svqvae2_input)
-                    recon3 = model.svqvae2[0].decode(qt3, qb3)
-                    
-                    latent_loss2 = diff3.mean()
+                    qt4, qb4, qj4, diff4, _, _ = model.svqvae2[1].encode(qj3)
+                    recon4 = model.svqvae2[1].decode(qj4)
+                    recon3 = model.svqvae2[0].decode(recon4)
+
+                    latent_loss2 = diff4.mean()
                     recon_loss2 = mse_loss(svqvae2_input, recon3)
                 else:
                     latent_loss2 = 0

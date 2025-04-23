@@ -305,7 +305,7 @@ if __name__ == '__main__':
                         
                         # Process through SVQVAE2 level 0
                         qt, qb, qj, diff, idt, idb = model.svqvae2[0].encode(input)
-                        recon = model.svqvae2[0].decode(qt, qb)
+                        recon = model.svqvae2[0].decode(qj)
                         
                     else:  # Second level of SVQVAE2
                         # Get output from first level of SVQVAE2
@@ -322,7 +322,7 @@ if __name__ == '__main__':
                         
                         # Process through SVQVAE2 level 1
                         qt, qb, qj, diff, idt, idb = model.svqvae2[1].encode(input)
-                        recon = model.svqvae2[1].decode(qt, qb)
+                        recon = model.svqvae2[1].decode(qj)
                         
                 elif method == 'recon_all':
                     if level == 3:  # First level of SVQVAE2
@@ -341,7 +341,7 @@ if __name__ == '__main__':
                         
                         # Process and reconstruct original input
                         qt, qb, qj, diff, idt, idb = model.svqvae2[0].encode(svqvae2_input)
-                        recon = model.svqvae2[0].decode(qt, qb)
+                        recon = model.svqvae2[0].decode(qj)
                         input = svqvae2_input
                         
                     else:  # Second level of SVQVAE2
@@ -361,7 +361,7 @@ if __name__ == '__main__':
                         qt, qb, qj, diff, idt, idb = model.svqvae2[1].encode(level0_output)
                         
                         # For recon_all, we try to reconstruct the original SVQVAE2 input
-                        recon = model.svqvae2[0].decode(model.svqvae2[1].decode(qt, qb))
+                        recon = model.svqvae2[0].decode(model.svqvae2[1].decode(qj))
                         input = svqvae2_input
                 
                 latent_loss = diff.mean()

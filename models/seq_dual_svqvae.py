@@ -173,7 +173,7 @@ class SequentialDualSVQVAE(nn.Module):
                 
                 # Encode and decode through SVQVAE2 level 0
                 quant_t, quant_b, joint_quant, diff, _, _ = self.svqvae2[0].encode(svqvae2_input)
-                recon_latent = self.svqvae2[0].decode(quant_t, quant_b)
+                recon_latent = self.svqvae2[0].decode(joint_quant)
                 
                 return svqvae2_input, recon_latent, diff
                 
@@ -183,7 +183,7 @@ class SequentialDualSVQVAE(nn.Module):
                 
                 # Encode and decode through SVQVAE2 level 1
                 quant_t, quant_b, joint_quant, diff, _, _ = self.svqvae2[1].encode(level0_encoding)
-                recon_latent = self.svqvae2[1].decode(quant_t, quant_b)
+                recon_latent = self.svqvae2[1].decode(joint_quant)
                 
                 return level0_encoding, recon_latent, diff
     

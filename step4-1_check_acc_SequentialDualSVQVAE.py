@@ -50,10 +50,10 @@ if __name__ == '__main__':
     
     # Choose one of the following checkpoint paths or set your own.
     # Update to your checkpoint path
-    model_checkpoint = 'runs/train-seqdual-wbc_100-classifier-XXXXXX/checkpoints/seqdual_best_XX.pt'
-    # model_checkpoint = 'runs/train-seqdual-wbc_50-classifier-XXXXXX/checkpoints/seqdual_best_XX.pt'
-    # model_checkpoint = 'runs/train-seqdual-wbc_10-classifier-XXXXXX/checkpoints/seqdual_best_XX.pt'
-    # model_checkpoint = 'runs/train-seqdual-wbc_1-classifier-XXXXXX/checkpoints/seqdual_best_XX.pt'
+    model_checkpoint = 'runs/train-seqdual-wbc_100-classifier-XXXXXX/checkpoints/seqdual_model_final.pt'
+    # model_checkpoint = 'runs/train-seqdual-wbc_50-classifier-XXXXXX/checkpoints/seqdual_model_final.pt'
+    # model_checkpoint = 'runs/train-seqdual-wbc_10-classifier-XXXXXX/checkpoints/seqdual_model_final.pt'
+    # model_checkpoint = 'runs/train-seqdual-wbc_1-classifier-XXXXXX/checkpoints/seqdual_model_final.pt'
     
     plt.rcParams['font.size'] = 14
     ds = ''
