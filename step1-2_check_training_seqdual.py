@@ -27,7 +27,8 @@ if __name__ == '__main__':
     
     # !!!Change this to your checkpoint path!!!
     # ex. 'runs/pretrain-seqdual-recon_all-b24-e100-100-s10-0422_145623/checkpoints/model_final.pt'
-    model_checkpoint = 'runs/pretrain-seqdual-recon_all-b1-e1-1-s1-0423_001958/checkpoints/model_final.pt'
+    # model_checkpoint = 'runs/pretrain-seqdual-recon_all-b1-e1-1-s1-0423_001958/checkpoints/model_final.pt'
+    model_checkpoint = 'checkpoints/test-seq/model_final.pt'
     # model_checkpoint = 'runs/pretrain-seqdual-recon_all-b24-e100-100-s10-XXXXXX/checkpoints/model_final.pt'
     pretrain_dir = os.path.join(*model_checkpoint.split('/')[:-1])
     
@@ -125,10 +126,10 @@ if __name__ == '__main__':
     # Define test datasets to visualize reconstructions
     datasets = {
         'wbc': {
-            'path': 'data/WBC_100/data/Neurophil',
+            'path': 'data/WBC_100/data/Neutrophil',
             'mean': [0.7048, 0.5392, 0.5885],
             'std': [0.1626, 0.1902, 0.0974],
-            'label': 'Neurophil'
+            'label': 'Neutrophil'
         },
         'cam': {
             'path': 'data/CAM16_100cls_10mask/train/data/normal',
@@ -216,15 +217,19 @@ if __name__ == '__main__':
             plt.figure(figsize=(15, 5))
             plt.suptitle(f"Sequential DualSVQVAE - SVQVAE1 reconstructions of {label}", fontsize=16)
             
-            plt.subplot(131)
+            plt.subplot(141)
             plt.title('Original')
             plt.imshow(denormalize_img(img, mean, std))
             
-            plt.subplot(132)
+            plt.subplot(142)
             plt.title('Recon from SVQVAE1 level 0')
             plt.imshow(denormalize_img(rimg0, mean, std))
+
+            plt.subplot(143)
+            plt.title('Recon from SVQVAE1 level 1')
+            plt.imshow(denormalize_img(rimg1, mean, std))
             
-            plt.subplot(133)
+            plt.subplot(144)
             plt.title('Recon from SVQVAE1 level 2')
             plt.imshow(denormalize_img(rimg2, mean, std))
             
